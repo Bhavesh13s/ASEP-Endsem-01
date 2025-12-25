@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>API Connection Test</h2>
+    <input type="text" id="apiKey" placeholder="Paste New API Key Here" style="width: 300px;">
+    <button onclick="testKey()">Test Key</button>
+    <p id="status">Waiting...</p>
+
+    <script>
+        async function testKey() {
+            const key = document.getElementById('apiKey').value;
+            const status = document.getElementById('status');
+            status.innerText = "Testing...";
+            
+            // Try the standard 1.5 Flash model
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{ parts: [{ text: "Say hello" }] }] })
+                });
+                
+                const data = await response.json();
+                
+                if(data.error) {
+                    status.style.color = "red";
+                    status.innerText = "Error: " + data.error.message;
+                } else {
+                    status.style.color = "green";
+                    status.innerText = "SUCCESS! This key works. You can use it in config.js.";
+                }
+            } catch(e) {
+                status.innerText = "Network Error: " + e.message;
+            }
+        }
+    </script>
+</body>
+</html>

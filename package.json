@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@google/genai": "^1.33.0",
+    "firebase": "^12.7.0"
+  }
+}

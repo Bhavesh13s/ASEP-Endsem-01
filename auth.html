@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EduQuiz AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0B0B0F; color: white; font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'Outfit', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        
+        /* Input Autofill Fix for Dark Mode */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: white;
+            -webkit-box-shadow: 0 0 0px 1000px #13131A inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="h-screen w-full flex overflow-hidden">
+
+    <div class="hidden lg:flex w-1/2 bg-[#13131A] relative items-center justify-center p-12 overflow-hidden">
+        <div class="absolute top-[-20%] left-[-20%] w-[80%] h-[80%] bg-purple-600/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div class="absolute bottom-[-20%] right-[-20%] w-[80%] h-[80%] bg-blue-600/10 rounded-full blur-[120px]"></div>
+
+        <div class="relative z-10 max-w-md">
+            <div class="w-16 h-16 bg-brand-purple rounded-2xl flex items-center justify-center mb-8 bg-purple-600 shadow-2xl shadow-purple-500/30">
+                <ion-icon name="sparkles" class="text-3xl text-white"></ion-icon>
+            </div>
+            <h1 class="text-5xl font-heading font-bold mb-6">Master your study material.</h1>
+            <p class="text-gray-400 text-lg leading-relaxed">
+                Join 10,000+ students using AI to turn boring textbooks into interactive quizzes and flashcards.
+            </p>
+            
+            <div class="mt-12 glass p-6 rounded-2xl border-l-4 border-purple-500">
+                <div class="flex gap-1 text-yellow-400 mb-3">
+                    <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+                </div>
+                <p class="text-gray-300 italic mb-4">"This app literally saved my semester. The flashcard feature is genius!"</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-pink-500"></div>
+                    <div>
+                        <p class="font-bold text-sm">Alex Chen</p>
+                        <p class="text-xs text-gray-500">Engineering Student</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 relative">
+        <a href="index.html" class="absolute top-8 left-8 text-gray-400 hover:text-white flex items-center gap-2 transition">
+            <ion-icon name="arrow-back"></ion-icon> Back
+        </a>
+
+        <div class="w-full max-w-md fade-in">
+            <div class="text-center mb-10 lg:hidden">
+                <h1 class="text-3xl font-heading font-bold">EduQuiz AI</h1>
+            </div>
+
+            <div class="glass p-8 rounded-3xl shadow-2xl">
+                <h2 class="text-2xl font-bold mb-2 font-heading">Welcome back</h2>
+                <p class="text-gray-400 mb-8 text-sm">Please enter your details to sign in.</p>
+
+                <form onsubmit="handleLogin(event)" class="space-y-5">
+                    <div class="group">
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-purple-400 transition">Email Address</label>
+                        <div class="relative">
+                            <ion-icon name="mail" class="absolute left-4 top-3.5 text-gray-500 text-lg"></ion-icon>
+                            <input type="email" value="student@university.edu" class="w-full bg-[#13131A] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition" required>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-purple-400 transition">Password</label>
+                        <div class="relative">
+                            <ion-icon name="lock-closed" class="absolute left-4 top-3.5 text-gray-500 text-lg"></ion-icon>
+                            <input type="password" value="password123" class="w-full bg-[#13131A] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition" required>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center text-xs">
+                        <label class="flex items-center gap-2 cursor-pointer text-gray-400 hover:text-white">
+                            <input type="checkbox" class="rounded bg-white/10 border-white/20 text-purple-600 focus:ring-0">
+                            Remember me
+                        </label>
+                        <a href="#" class="text-purple-400 hover:text-purple-300">Forgot password?</a>
+                    </div>
+
+                    <button id="login-btn" type="submit" class="w-full bg-white text-black font-bold py-3.5 rounded-xl hover:bg-gray-200 transition shadow-lg shadow-white/10 flex items-center justify-center gap-2">
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="relative my-8">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
+                    <div class="relative flex justify-center text-xs"><span class="px-2 bg-[#121217] text-gray-500">Or continue with</span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="glass py-2.5 rounded-xl hover:bg-white/5 transition flex items-center justify-center gap-2">
+                        <ion-icon name="logo-google" class="text-lg"></ion-icon> Google
+                    </button>
+                    <button class="glass py-2.5 rounded-xl hover:bg-white/5 transition flex items-center justify-center gap-2">
+                        <ion-icon name="logo-github" class="text-lg"></ion-icon> Github
+                    </button>
+                </div>
+            </div>
+
+            <p class="text-center mt-8 text-gray-500 text-sm">
+                Don't have an account? <a href="#" onclick="alert('This feature is coming soon!')" class="text-white font-bold hover:underline">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            
+            // 1. Loading State (Button spins)
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<div class="animate-spin h-5 w-5 border-2 border-black rounded-full border-t-transparent"></div> Signing in...`;
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            // 2. Simulate Network Request (1.5 seconds)
+            setTimeout(() => {
+                // 3. Success Checkmark
+                btn.innerHTML = `<ion-icon name="checkmark-circle" class="text-xl"></ion-icon> Success!`;
+                btn.classList.remove('bg-white', 'text-black');
+                btn.classList.add('bg-green-500', 'text-white');
+
+                // 4. Redirect
+                setTimeout(() => {
+                    window.location.href = 'app.html';
+                }, 800);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
